@@ -39,6 +39,25 @@ class Solution {
             }
         }
 
+        // 혹은 이터레이터 사용하기
+        // hashMap같은 경우 해당 컬렉션을 반복하는 동안 수정할 경우 ConcurrentModificationException예외 발생
+        // 따라서 iterator를 사용하여 안전하게 remove() 수행
+        /**
+        Iterator<String> iterator = recodeMap.keySet().iterator();
+        while (iterator.hasNext()) {
+            String k = iterator.next();
+            String[] IN = recodeMap.get(k).split(":");
+            String[] OUT = "23:59".split(":");
+
+            int hour = Integer.parseInt(OUT[0]) - Integer.parseInt(IN[0]);
+            int minute = Integer.parseInt(OUT[1]) - Integer.parseInt(IN[1]);
+            int parkingTime = hour * 60 + minute;
+
+            parkingTimeArr[Integer.parseInt(k)] += parkingTime;
+            iterator.remove(); // 안전하게 제거
+        }
+        **/
+
         List<Integer> list = new ArrayList<>();
 
         for (int i = 0; i <= 9999; i++) {
