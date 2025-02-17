@@ -32,17 +32,12 @@ public class Main {
         br.close();
     }
 
-    private static boolean isPrime(int n) {
-        int cnt = 0;
-        for (int j = 1; j <= n/2; j++) {
-            if (n % j == 0) {
-                cnt++;
-            }
+    private static boolean isPrime(int num) {
+        if (num <= 1) return false;
+        if (num == 2) return true;
+        for (int i = 2; i * i <= num; i++) { // 제곱근까지 검사
+            if (num % i == 0) return false;
         }
-        cnt++;
-        if (cnt == 2){
-            return true;
-        }
-        return false;
+        return true;
     }
 }
