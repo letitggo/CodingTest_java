@@ -6,37 +6,18 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
+        int result = -1;
 
-        int cnt3 = 0;
-        int temp = n;
-        int cnt5 = temp / 5;
-
-        while (true) {
-            for (int i = 0; i < cnt5; i++) {
-                temp = temp - 5;
-            }
-
-            while (true) {
-                if (temp - 3 >= 0) {
-                    temp -= 3;
-                    cnt3++;
-                } else {
-                    break;
-                }
-            }
-
-            if (temp == 0) {
-                System.out.println(cnt5 + cnt3);
-                break;
-            } else if (cnt5 < 0) {
-                System.out.println(-1);
+        for (int i = n / 5; i >= 0; i--) {
+            int remain = n - 5 * i;
+            if (remain % 3 == 0) {
+                result = i + (remain / 3);
                 break;
             }
-
-            temp = n;
-            cnt5--;
-            cnt3 = 0;
         }
+
+        System.out.println(result);
+
         br.close();
     }
 
