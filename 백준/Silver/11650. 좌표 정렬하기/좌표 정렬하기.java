@@ -19,10 +19,19 @@ public class Main {
             arr[i][1] = Integer.parseInt(st.nextToken());
         }
 
-        Arrays.sort(arr, Comparator
+        // 방법 1
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1[0] == o2[0]) {
+                return Integer.compare(o1[1], o2[1]);
+            }
+            return Integer.compare(o1[0], o2[0]);
+        });
+
+        // 방법 2
+        /*Arrays.sort(arr, Comparator
                 .comparingInt((int[] a) -> a[0])
                 .thenComparing(a -> a[1])
-        );
+        );*/
 
         for (int i = 0; i < n; i++) {
             System.out.print(arr[i][0] + " ");
