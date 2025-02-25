@@ -18,26 +18,26 @@ public class Main {
             String name = br.readLine();
             map.put(name, map.getOrDefault(name, 0) + 1);
         }
+
+        ArrayList<String> list = new ArrayList<>();
+        
+        // 보도 못한 사람을 입력받으며 보도 못했는지 확인 후 리스트에 add
         for (int i = 0; i < neverSeenN; i++) {
             String name = br.readLine();
-            map.put(name, map.getOrDefault(name, 0) + 1);
+            if (map.containsKey(name)) {
+                list.add(name);
+            }
         }
 
-        List<String> answerList = new ArrayList<>();
-        map.forEach((s, integer) -> {
-            if (integer >= 2){
-                answerList.add(s);
-            }
-        });
-
-        answerList.sort(Comparator.naturalOrder());
+        // 사전순으로 정렬
+        list.sort(Comparator.naturalOrder());
 
         StringBuilder sb = new StringBuilder();
-        for (String s : answerList) {
+        for (String s : list) {
             sb.append(s + "\n");
         }
 
-        bw.write(answerList.size() + "\n" + sb);
+        bw.write(list.size() + "\n" + sb);
 
         br.close();
         bw.close();
