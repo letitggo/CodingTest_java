@@ -25,11 +25,15 @@ public class Main {
         bw.close();
     }
 
+    // 좀 더 효율적인 소수 판별
     private static boolean isPrime(int num) {
-        if (num <= 1) return false;
-        if (num == 2) return true;
-        for (int i = 2; i * i <= num; i++) { // 제곱근까지 검사
-            if (num % i == 0) return false;
+        if(num <= 1) return false;
+        if(num == 2 || num == 3) return true;
+        if(num % 2 == 0) return false; // 짝수 제외
+
+        // 홀수만 3부터 √num까지 검사 (2씩 증가)
+        for(int i=3; i*i <= num; i+=2) {
+            if(num % i == 0) return false;
         }
         return true;
     }
