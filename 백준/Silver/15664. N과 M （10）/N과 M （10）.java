@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -14,7 +12,6 @@ public class Main {
     static int n;
     static int m;
     static StringBuilder sb = new StringBuilder();
-    static Set<String> set = new HashSet<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,19 +36,15 @@ public class Main {
     private static void backtrack(int depth, int start) {
 
         if (depth == m) {
-            StringBuilder builder = new StringBuilder();
             for (int i = 0; i < m; i++) {
-                builder.append(combination[i]).append(" ");
+                sb.append(combination[i]).append(" ");
             }
-            if (!set.contains(builder.toString())){
-                set.add(builder.toString());
-                sb.append(builder).append("\n");
-            }
+            sb.append("\n");
             return;
         }
 
         for (int i = start; i < n; i++) {
-            if (selected[i]) continue;
+            if (i > start && arr[i] == arr[i-1]) continue;
             combination[depth] = arr[i];
             selected[i] = true;
             backtrack(depth + 1, i + 1);
