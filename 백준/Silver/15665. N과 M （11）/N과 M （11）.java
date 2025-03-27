@@ -37,23 +37,18 @@ public class Main {
 
     private static void backtrack(int depth, Set<String> set) {
 
-        StringBuilder builder = new StringBuilder();
         if (depth == m) {
             for (int i = 0; i < m; i++) {
-                builder.append(combination[i]).append(" ");
+                sb.append(combination[i]).append(" ");
             }
-            if (!set.contains(builder.toString())){
-                set.add(builder.toString());
-                sb.append(builder).append("\n");
-            }
+            sb.append("\n");
             return;
         }
 
         for (int i = 0; i < n; i++) {
+            if (i > 0 && arr[i] == arr[i-1]) continue;
             combination[depth] = arr[i];
-            selected[i] = true;
             backtrack(depth + 1, set);
-            selected[i] = false;
         }
     }
 }
