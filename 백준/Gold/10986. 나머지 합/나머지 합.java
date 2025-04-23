@@ -4,7 +4,7 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
 
         st = new StringTokenizer(br.readLine());
@@ -13,25 +13,19 @@ public class Main {
         st = new StringTokenizer(br.readLine());
 
         long[] sum = new long[n + 1];
+        int[] remain = new int[m];
+        remain[0] = 1; // sum[0] = 0 이므로, sum[0] % m = 0. 나머지 0의 개수를 1로 시작
+
+        long answer = 0L; // 결과를 저장할 변수를 long 타입으로 선언
+
         for (int i = 1; i < n + 1; i++) {
             sum[i] = sum[i - 1] + Integer.parseInt(st.nextToken());
+            int targetRemainder = (int) (sum[i] % m); // 현재 누적합의 나머지 계산
+
+            answer += remain[targetRemainder];
+            remain[targetRemainder]++;
         }
-
-        int[] remain = new int[m];
-        for (int i = 1; i < n + 1; i++) {
-            int target = (int) (sum[i] % m);
-            remain[target]++;
-        }
-
-        long answer = 0;
-        for (int i = 0; i < m; i++) {
-            if (remain[i] > 1) {
-                answer += (long) remain[i] * (remain[i] - 1) / 2;
-            }
-        }
-
-        System.out.println(answer + remain[0]);
-
-        bw.flush();
+        
+        System.out.println(answer);
     }
 }
