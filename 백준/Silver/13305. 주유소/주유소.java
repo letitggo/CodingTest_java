@@ -1,4 +1,5 @@
 import java.io.*;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -8,7 +9,7 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());    // 도시의 수
 
-        int remain = 0;
+        long remain = 0;
         int[] road = new int[n + 1];  // 도로의 길이
         st = new StringTokenizer(br.readLine());
         for (int i = 1; i < n; i++) {
@@ -16,7 +17,7 @@ public class Main {
             remain += road[i];
         }
 
-        int minIdx = 0;
+        int minIdx = 1;
         int[] prices = new int[n + 1];  // 리터당 기름 가격
         st = new StringTokenizer(br.readLine());
         for (int i = 1; i < n + 1; i++) {
@@ -35,6 +36,15 @@ public class Main {
             } else {
                 ans += (long) prices[i] * road[i];
                 remain -= road[i];
+                int curPrice = prices[i];
+                for (int j = i + 1; j < n; j++) {
+                    if (curPrice < prices[j]) {
+                        ans += (long) curPrice * road[j];
+                        remain -= road[j];
+                        i++;
+                    } else
+                        break;
+                }
             }
         }
         System.out.println(ans);
