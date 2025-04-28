@@ -40,7 +40,6 @@ public class Main {
             }
         }
 
-        // 모두 같은 값이면
         if (!flag) {
             int nextSize = size / 3;
             for (int i = 0; i < 3; i++) {
