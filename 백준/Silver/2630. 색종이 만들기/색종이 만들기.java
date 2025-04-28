@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.annotation.Retention;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -25,23 +26,16 @@ public class Main {
 
     private static void solution(int row, int col, int size) {
         int color = arr[row][col];
-        boolean flag = false;
-
         for (int i = row; i < size + row; i++) {
-            if (flag) break;
             for (int j = col; j < size + col; j++) {
                 if (arr[i][j] != color){
-                    flag = true;
-                    break;
+                    solution(row, col, size / 2);
+                    solution(row, col + size / 2, size / 2);
+                    solution(row + size / 2, col, size / 2);
+                    solution(row + size / 2, col + size / 2, size / 2);
+                    return;
                 }
             }
-        }
-        if (flag) {
-            solution(row, col, size / 2);
-            solution(row, col + size / 2, size / 2);
-            solution(row + size / 2, col, size / 2);
-            solution(row + size / 2, col + size / 2, size / 2);
-            return;
         }
 
         if (arr[row][col] == 0) {
