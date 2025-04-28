@@ -4,9 +4,7 @@ import java.util.StringTokenizer;
 public class Main {
     static int n;
     static int[][] arr;
-    static int cntOne = 0;
-    static int cntZero = 0;
-    static int cntMinus = 0;
+    static int[] ans = new int[4];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,39 +19,42 @@ public class Main {
             }
         }
 
-        paper(0, 0, n);
-        System.out.println(cntMinus);
-        System.out.println(cntZero);
-        System.out.println(cntOne);
+        divide(0, 0, n);
+        System.out.println(ans[0]);
+        System.out.println(ans[1]);
+        System.out.println(ans[2]);
     }
 
-    private static void paper(int row, int col, int size) {
+    private static void divide(int row, int col, int size) {
 
-        int value = arr[row][col];
+        int initial = arr[row][col];
+        boolean flag = true;
 
-        for (int i = row; i < size + row; i++) {
-            for (int j = col; j < size + col; j++) {
-                if (value != arr[i][j]) {
-                    int nextSize = size / 3;
-                    paper(row, col, nextSize);
-                    paper(row, col + nextSize, nextSize);
-                    paper(row, col + nextSize * 2, nextSize);
-
-                    paper(row + nextSize, col, nextSize);
-                    paper(row + nextSize, col + nextSize, nextSize);
-                    paper(row + nextSize, col + nextSize * 2, nextSize);
-
-                    paper(row + nextSize * 2, col, nextSize);
-                    paper(row + nextSize * 2, col + nextSize, nextSize);
-                    paper(row + nextSize * 2, col + nextSize * 2, nextSize);
-                    
-                    return;
+        outer:
+        for (int i = row; i < row + size; i++) {
+            for (int j = col; j < col + size; j++) {
+                if (initial != arr[i][j]){
+                    flag = false;
+                    break outer;
                 }
             }
         }
 
-        if (value == 0) cntZero++;
-        if (value == 1) cntOne++;
-        if (value == -1) cntMinus++;
+        // 모두 같은 값이면
+        if (!flag) {
+            int nextSize = size / 3;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    divide(
+                        row + i * nextSize, 
+                        col + j * nextSize, 
+                        nextSize
+                    );
+                }
+            }
+            return;
+        }
+
+        ans[initial + 1]++;
     }
 }
