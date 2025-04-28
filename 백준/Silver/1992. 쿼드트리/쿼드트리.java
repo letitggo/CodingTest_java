@@ -1,10 +1,8 @@
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
     static int n;
     static char[][] arr;
-    static int[] ans = new int[4];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,15 +23,7 @@ public class Main {
     }
 
     private static void compression(int row, int col, int size, StringBuilder sb) {
-        if (size <= 1) {
-            for (int i = row; i < row + size; i++) {
-                for (int j = col; j < col + size; j++) {
-                    sb.append(arr[i][j]);
-                }
-            }
-            return;
-        }
-
+        // check
         int initial = arr[row][col];
         boolean canComp = true;
         outer:
