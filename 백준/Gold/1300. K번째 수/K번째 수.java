@@ -14,7 +14,7 @@ public class Main {
 
     static long search() {
         long low = 1;
-        long high = k;
+        long high = (long) n * n;
         long ans = 1;
         while (low <= high) {
             long mid = (low + high) / 2;
