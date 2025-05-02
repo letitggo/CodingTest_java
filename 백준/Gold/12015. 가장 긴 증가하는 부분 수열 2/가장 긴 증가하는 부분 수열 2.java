@@ -2,13 +2,12 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int n;   // 수열의 길이
     static int[] arr;
     static ArrayList<Integer> lis = new ArrayList<>();
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        n = Integer.parseInt(br.readLine());
+        int n = Integer.parseInt(br.readLine());
         arr = new int[n];
         StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -16,17 +15,18 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        for (int num : arr) {
-            if (lis.isEmpty() || num > lis.get(lis.size() - 1)) {
-                lis.add(num);
+        for (int value : arr) {
+            if (lis.isEmpty() || lis.get(lis.size() - 1) < value) {
+                lis.add(value);
             } else {
-                search(num);
+                int idx = search(value);
+                lis.set(idx, value);
             }
         }
         System.out.println(lis.size());
     }
 
-    static void search(int target) {
+    static int search(int target) {
         int low = 0;
         int high = lis.size() - 1;
         int idx = 0;
@@ -39,6 +39,6 @@ public class Main {
                 low = mid + 1;
             }
         }
-        lis.set(idx, target);
+        return idx;
     }
 }
