@@ -41,13 +41,9 @@ public class Main {
         dfs(r, 1);
 
         for (int i = 1; i < n + 1; i++) {
-            if (!visited[i]) {
-                sb.append(0).append("\n");
-            }
+            sb.append(answer[i]).append("\n");
         }
-        for (int i = 1; i < n + 1; i++) {
-            System.out.println(answer[i]);
-        }
+        System.out.println(sb);
     }
 
     private static int dfs(int cur, int depth) {
